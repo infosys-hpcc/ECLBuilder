@@ -89,6 +89,7 @@
 		<filter-name>RequestWrappingFilter</filter-name>
 		<filter-class>org.hpccsystems.eclBuilder.requestwrapper.RequestWrappingFilter</filter-class>
 	</filter>
+	
 	<filter-mapping>
 		<filter-name>RequestWrappingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
