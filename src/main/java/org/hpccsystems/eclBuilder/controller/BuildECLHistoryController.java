@@ -148,11 +148,6 @@ public class BuildECLHistoryController extends SelectorComposer<Component> imple
 		}
 		Platform platform;
 		try {
-			/*HPCCConnection connection = HipieSingleton.getHipie().getHpccManager().getConnections().get(hpccID);
-			platform = Platform.get((connection.getIsHttps() ? "https" : "http"), connection.getServerHost(),
-					connection.getServerPort(), connection.getUserName(), connection.getPwd());
-
-			HPCCWsClient connector = platform.getHPCCWSClient();*/
 
 			WorkunitInfo wuInfo = connector.getWsWorkunitsClient().getWUInfo(wwid);
 

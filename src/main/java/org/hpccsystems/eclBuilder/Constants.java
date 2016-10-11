@@ -7,7 +7,6 @@ public class Constants {
     // Spring service names
     public static final String AUTHENTICATION_SERVICE = "authenticationService";
     public static final String USER_SERVICE = "userService";
-    public static final String COMPOSITION_SERVICE =  "compositionService";
     public static final String HPCC_SERVICE ="hpccService";
     public static final String DB_LOGGER="dbLogger";
     public static final String DESKTOP ="desktop";
@@ -33,20 +32,18 @@ public class Constants {
         public static final String ON_PAGE_CHANGE = "onPageChange";
         public static final String ON_PROJECT_ADD = "onProjectAdd";
         public static final String ON_DROP_PLUGIN_ON_ARROW = "onDropPluginOnArrow";
-        public static final String ON_DELETE_COMPOSITION = "onDeleteComposition";
         public static final String ON_VIEW_PROCESS = "onViewProcess";
         public static final String ON_UPDATE_PROCESSES = "onUpdateProcesses";
         public static final String ON_SELECT_PROCESS_OUTPUT = "onSelectProcessOutput";
         public static final String ON_SAVE = "onSave";
-        public static final String ON_SAVE_COMPOSITION = "onSaveComposition";
         public static final String ON_CLOSE_SAVE_AS_WINDOW = "onCloseSaveAsWindow";
         public static final String ON_RUN = "onRun";
         public static final String ON_RUN_COMPLETE = "onRunComplete";
         public static final String ON_VALIDATE = "onValidate";
         public static final String ON_CLICK_CLONE = "onClickClone";
         public static final String ON_CLICK_EDIT = "onClickEdit";
-        public static final String ON_OPEN_COMPOSITION = "onOpenComposition";
-        public static final String ON_LOAD_CLONED_COMPOSITION = "onLoadClonedComposition";
+        public static final String ON_OPEN_EclBuilder = "onOpenEclBuilder";
+        public static final String ON_LOAD_CLONED_EclBuilder = "onLoadClonedEclBuilder";
         public static final String ON_CLICK_VIEW = "onClickView";
         public static final String ON_PLUGIN_ADD = "onPluginAdd";
         public static final String ON_SELECT_ENTITY = "onSelectEntity";
@@ -61,20 +58,20 @@ public class Constants {
         public static final String ON_CHANGE_HPCC_CONNECTION = "onChangeHPCCConnection";
         public static final String ON_CLOSE_OLD_PROJECT = "onCloseOldProject";
         public static final String ON_RETURN_TO_EDIT = "onReturnToEdit";
-        public static final String ON_CREATE_COMPOSITION = "onCreateComposition";
+        public static final String ON_CREATE_EclBuilder = "onCreateEclBuilder";
         public static final String ON_OPEN_WIDGET_CONFIGURATION = "onOpenWidgetConfiguration";
-        public static final String ON_DASHBOARD_VIEW = "onDashboardView";
+        public static final String ON_EclBuilderProfile_VIEW = "onEclBuilderProfileView";
         public static final String ON_DISABLE_SETTINGS = "onDisableSettings";
         public static final String ON_ENABLE_SETTINGS = "onEnableSettings";
-        public static final String ON_FAV_COMPOSITION = "onFavoriteComposition";
+        public static final String ON_FAV_EclBuilder = "onFavoriteEclBuilder";
         /**
-         * Event to create and associate a new Datasource to Dashboard. 
+         * Event to create and associate a new Datasource to EclBuilderProfile. 
          * Event has to be fired to widgetCanvas in WidgetConfig
          * Implementation is at WidgetController 
          */
         public static final String ON_SELECT_DATASOURCE = "onSelectDatasource";
         public static final String ON_OPEN_INTERACTIVITY = "onOpenInteractivity";
-        public static final String DELETE_DASHBOARD_DUD_AND_SAVE_COMP = "onDeleteDashboardDudAndSaveComp";
+        public static final String DELETE_EclBuilderProfile_DUD_AND_SAVE_COMP = "onDeleteEclBuilderProfileDudAndSaveComp";
 
         public static final String ON_PROCESS_LOADED = "onProcessLoaded";
         public static final String ON_PROCESS_LOAD_FAIL = "onProcessLoadFail";
@@ -91,7 +88,7 @@ public class Constants {
         public static final String ON_FILE_LOADED = "onFileLoaded";
         public static final String ON_FILE_LOAD_FAILED = "onFileLoadFailed";
         public static final String ON_CHANGE_LABEL = "onChangeLabel";
-        public static final String ON_SAVE_DASHBOARD_CONFIG = "onSaveDashboardConfig";
+        public static final String ON_SAVE_EclBuilderProfile_CONFIG = "onSaveEclBuilderProfileConfig";
         
         //Events to select/change GCIDs
         public static final String ON_CONFIRM_GCID = "onConfirmGCID";
@@ -109,7 +106,7 @@ public class Constants {
         public static final String ON_PROMOTION_COMPLETE = "onPromotionComplete";
         public static final String ON_PROMOTION_FAIL = "onPromotionFail";
         
-        // Events to open/interact with dashboard advanced mode
+        // Events to open/interact with EclBuilderProfile advanced mode
         public static final String ON_OPEN_ADVANCED_MODE = "onOpenAdvancedMode";
         
         private EVENTS() {
@@ -127,10 +124,9 @@ public class Constants {
     public static final String HPCC_DATA = "hpccData";
     public static final String HPCC_CONNNECTION = "hpccConnection";
     //This constant is also used as URL parameter. Don't change the value
-    public static final String COMPOSITION = "composition";
+    public static final String EclBuilder = "EclBuilder";
     public static final String COLON = ":";
     public static final String PLUGIN = "plugin";
-    public static final String HIPIE_ERROR = "hipieError";
     public static final String VISUALIZATION_DDL = "visualizationDDL";
 
     // Edit project screen flow type
@@ -189,7 +185,7 @@ public class Constants {
     public static final String TILDE = "~";
 
     public static final String PREVIEW_TAB = "preview_tab";
-    public static final String DASHBOARD_CONFIG = "dashboardConfig";
+    public static final String EclBuilderProfile_CONFIG = "EclBuilderProfileConfig";
     public static final String ON_CLICK_NEXT_CHOOSE_WIDGET = "onClickNextToChooseWidget";
     public static final String WIDGET = "widget";
     public static final String TRUE = "true";
@@ -200,9 +196,9 @@ public class Constants {
     public static final String PLUGIN_RELATION = "pluginRelation";
     public static final String ON_CHOOSING_PLUGIN_RELATION = "onChoosingPluginRelation";
     public static final String CONTRACT_INSTANCE = "contractInstance";
-    public static final String DASHBOARD = "dashboard";
+    public static final String EclBuilderProfile = "EclBuilderProfile";
     public static final String REPO = "repo";
-    public static final String OPEN_DASHBOARD_LABELS = "dashboardlabels";
+    public static final String OPEN_EclBuilderProfile_LABELS = "EclBuilderProfilelabels";
     public static final String PROCESS_PAGE_TYPE = "processPageType";
     public static final String NAME = "name";
     public static final String MEASURE_SORTED = "measureSorted";
@@ -249,7 +245,7 @@ public class Constants {
     public static final String COUNT="COUNT";
     //Time to display the status message in milliseconds
     public static final int MESSAGE_VIEW_TIME = 2000;
-    public static final String COMPOSITION_PERMISSION = "compositionPermission";
+    public static final String EclBuilder_PERMISSION = "EclBuilderPermission";
     public static final String FORWARD_EVENT = "forwardEvent";
     public static final String REFRESH_MODEL = "onRefreshModel";
     public static final String ADD_TO_MODEL = "onAddToModel";
@@ -261,12 +257,12 @@ public class Constants {
 
     
     public static final String SERVICE = "_service";
-    public static final String DASHBOARD_HOLDER_UUID = "ChartHolderUuid";
+    public static final String EclBuilderProfile_HOLDER_UUID = "ChartHolderUuid";
     
     public static final String GENERIC_USER = "genericUser";
     
     public static final String PIPE = "|";
-    public static final String BATCH_COMPOSITION = "BatchComposition";
+    public static final String BATCH_EclBuilder = "BatchEclBuilder";
     public static final String SPACE = " ";
     
     public static final String KEEP_ECL = "KeepECL";

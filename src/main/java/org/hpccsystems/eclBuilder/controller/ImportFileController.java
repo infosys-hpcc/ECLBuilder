@@ -997,10 +997,6 @@ public class ImportFileController extends SelectorComposer<Component> implements
         long startTime = Instant.now().toEpochMilli();
         
         ECLBuilderExecutorHolder.getExecutor().execute(sprayFile);
-        /*if (LOGGER.isDebugEnabled()) {
-            ((DBLogger)SpringUtil.getBean(Constants.DB_LOGGER)).log(new HipieQuery(HipieQuery.SPRAY_FILE, startTime, "File sprayed")); 
-        }*/
-        
     }
 
     @Override
