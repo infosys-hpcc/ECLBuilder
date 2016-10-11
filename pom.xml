@@ -281,7 +281,6 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5</version>
 		</dependency>
-		<!-- HIPIE depends on this and this -->
 
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
