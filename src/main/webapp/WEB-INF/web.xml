@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"> 
+
+	<description><![CDATA[My ZK Application]]></description>
+	<display-name>ECL Builder</display-name>
+
+	<!-- Spring configuration -->
+	<!-- Initialize spring context -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- //// -->
+	<!-- ZK -->
+	<listener>
+		<description>ZK listener for session cleanup</description>
+		<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
+	</listener>
+	<servlet>
+		<description>ZK loader for ZUML pages</description>
+		<servlet-name>zkLoader</servlet-name>
+		<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
+
+			<init-param>
+			<param-name>update-uri</param-name>
+			<param-value>/zkau</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup><!-- Must -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>zkLoader</servlet-name>
+		<url-pattern>*.zul</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>zkLoader</servlet-name>
+		<url-pattern>*.zhtml</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>The asynchronous update engine for ZK</description>
+		<servlet-name>auEngine</servlet-name>
+		<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>auEngine</servlet-name>
+		<url-pattern>/zkau/*</url-pattern>
+	</servlet-mapping>
+	
+	<!--Spring DispatcherServlet to make DSP interact with other appln -->	
+	 <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+   		<load-on-startup>2</load-on-startup>        
+    </servlet> 
+
+	 <servlet>
+        <servlet-name>ws-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+   		<load-on-startup>3</load-on-startup>        
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ws-dispatcher</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ws-dispatcher</servlet-name>
+        <url-pattern>/wsCompositions/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ws-dispatcher</servlet-name>
+        <url-pattern>/wsHpcc/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    
+	<!-- RequestWrapper mapping for XSS -->
+    <filter>
+		<filter-name>RequestWrappingFilter</filter-name>
+		<filter-class>org.hpccsystems.dsp.requestwrapper.RequestWrappingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RequestWrappingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- /////////// -->
+	<!-- [Optional] Session timeout -->
+	<!--<session-config>
+			<session-timeout>60</session-timeout>
+		</session-config>-->
+	
+	<!-- Error Page -->
+	<error-page>
+	    <exception-type>java.lang.Throwable</exception-type>    
+	    <location>/error/page.zul</location>    
+	</error-page>
+
+
+	<welcome-file-list>
+		<welcome-file>eclBuilder/login.zul</welcome-file>
+		<welcome-file>index.zhtml</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+	</welcome-file-list>
+</web-app>

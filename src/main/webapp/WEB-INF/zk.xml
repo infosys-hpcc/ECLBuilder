@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	<system-config>
+    	<label-location>/WEB-INF/label.properties</label-location>
+    	<!-- uncomment to use in production environment  -->
+    	<!-- <ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class> -->
+    	<!-- uncomment to use in production environment  -->
+   	</system-config>
+   	
+   	<session-config>
+   		<session-timeout>1200</session-timeout>
+   		<automatic-timeout/>
+	    <device-type>ajax</device-type>
+	    <timeout-message>label:timeout</timeout-message>
+	</session-config>
+   	
+   	<library-property>
+	    <name>org.zkoss.theme.preferred</name>
+	    <value>atlantic</value>
+	</library-property>
+	
+	<library-property>
+	    <name>org.zkoss.zul.tree.rightSelect</name>
+	    <value>false</value>
+	</library-property>
+	
+	<!-- This enabled floating scroll bar. Can be used after fixing File selection-->
+	<library-property>
+	    <name>org.zkoss.zul.nativebar</name>
+	    <value>false</value>
+	</library-property>
+	
+	
+	<!-- Static ID Generation for Testing 
+	<system-config>
+	    <id-generator-class>org.zkoss.zk.ui.impl.StaticIdGenerator</id-generator-class>
+	</system-config>
+	-->
+	
+	<!-- Tomcat cluster Handler -->
+	<!-- <listener>
+        <description>Webapp Initializer in Tomcat Clusters</description>
+        <listener-class>org.hpccsystems.dsp.init.ClusterManager</listener-class>
+	</listener> -->
+	
+	<!-- Hipie Service Initializer -->
+	<!-- <listener>
+        <description>Webapp Initializer for HIPIE Service</description>
+        <listener-class>org.hpccsystems.dsp.init.HipieSingleton</listener-class>
+	</listener> -->
+	
+	<!-- Executor Service Initializer -->
+    <listener>
+		<description>Webapp Initializer for Executor Service</description>
+		<listener-class>org.hpccsystems.dsp.init.DSPExecutorHolder</listener-class>
+	</listener>
+
+<!-- 	<listener>
+		<description>Session Initialization</description>
+		<listener-class>org.hpccsystems.dsp.init.DSPSessionInit</listener-class>
+	</listener>
+	<listener>
+		<description>Session Cleanup</description>
+		<listener-class>org.hpccsystems.dsp.init.DSPSessionCleanup</listener-class>
+	</listener> -->
+	
+	<listener>
+		<description>Warn session timeout</description>
+		<listener-class>org.hpccsystems.dsp.init.TimeoutAlerter</listener-class>
+	</listener>
+	
+	<!-- <listener>
+        <listener-class>org.zkoss.zkplus.cluster.ClusterSessionPatch</listener-class>
+    </listener> -->
+	
+	
+	<error-page>
+	    <exception-type>java.lang.Throwable</exception-type>    
+	    <location>/error/popup.zul</location>    
+	</error-page>
+</zk>
