@@ -8,12 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-/**
- * 
- * Filtering the HTTP requests from HIPIE form validation and save.
- * Also visualization web service request
- *
- */
 public class RequestWrappingFilter implements Filter{
  
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException{

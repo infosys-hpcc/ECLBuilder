@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Filter the HTTP Request from HIPIE form validation, save Also filtering the
- * visualization web service request
- *
- */
 public class MyHttpRequestWrapper extends HttpServletRequestWrapper {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyHttpRequestWrapper.class);
 

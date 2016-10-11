@@ -164,8 +164,6 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 		treeGrid.appendChild(rootChildren);
 		treeGrid.setStyle("overflow: auto;overflow-y:auto");
 		
-//		HPCCConnection connection =  HipieSingleton.getHipie().getHpccManager().getConnections().get(hpccID);
-
 		if (null != rootFolder.getListOfFolders()) {
 			TreeCreation.buildTree(rootFolder.getListOfFolders(), children, Add, connector);
 			for (Component titem : children.getChildren()) {
@@ -176,40 +174,18 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 		}
 
 		selectedFiles.setStyle("text-align: left");
-		/*
-		selectedFiles.setItemRenderer(new ListitemRenderer<String>() {
-
-			@Override
-			public void render(Listitem listItem, String value, int arg2) throws Exception {
-				// TODO Auto-generated method stub
-				listItem.setValue(value);
-				listItem.setLabel(value);
-				listItem.addForward("onDoubleClick", Remove, "onClick");
-				listItem.setStyle("align:center");
-			}
-		});*/
 	}
 
 	public void addListeners(List<Component> children) {
 		for (Component titem : children) {
-			// titem.addEventListener("onClick", e ->
-			// onClickAddChildren(e));
 			if (titem instanceof Treeitem && titem.getChildren() != null) {
 				titem.addForward("onOpen", treeGrid, "onClickAction");
-				// titem.addForward("onClick", treeGrid, "onClickAction");
-				// titem.addForward("onSelect", treeGrid, "onClickAction");
 			}
 		}
 	}
 
 	@Listen("onClick = #newDataSource")
 	public void showModal(Event e) {
-		// dashboardConfig.setFileBrowser(getSelf());
-		// importInclude.setDynamicProperty(Constants.DASHBOARD_CONFIG,
-		// dashboardConfig);
-		// importInclude.setDynamicProperty(Dashboard.WIDGET_CONFIG,
-		// widgetConfig);
-		// importInclude.setDynamicProperty(Constants.FILE, logicalDirName);
 		importInclude.setDynamicProperty("hpccConnID", hpccID);
 		importInclude.setSrc("eclBuilder/import_file.zul");
 		importFileAlternate.setSelected(true);
@@ -225,8 +201,6 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 
 	@Listen("onClick = #addfiles")
 	public void onAddFiles(Event evnt) {
-		// System.out.println(evnt.getTarget().getId() +
-		// evnt.getTarget().getParent().getId());
 		Events.postEvent("onAddFiles", evnt.getTarget().getParent().getParent().getParent(),
 				((List<String>) selectedFiles.getModel()));
 		evnt.getTarget().getParent().getParent().detach();
@@ -299,7 +273,6 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 	private String formBasicECLForFile(String logicalFile, boolean addOutput) {
 
 		logicalFile = logicalFile.startsWith("~") ? logicalFile : "~" + logicalFile;
-//		HPCCConnection connection = HipieSingleton.getHipie().getHpccManager().getConnections().get(hpccID);
 		String tempStrArr[] = logicalFile.split("::");
 		String datasetName = tempStrArr[tempStrArr.length - 1];
 		DFUInfoResponse dfuFileDetail;
@@ -308,10 +281,6 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 			
 			dfuFileDetail =  connector.getWsDFUClient().getFileInfo(logicalFile, null);
 			
-//			dfuFileDetail = connector.getWsDFUClient().getFileInfo(arg0, arg1)
-//					
-//					((HPCCService) SpringUtil.getBean(Constants.HPCC_SERVICE)).getFileDetail(logicalFile,
-//					connection, connector.getAvailableClusterNames(hpccID));
 
 			String eclCode = datasetName + "recName :=" + dfuFileDetail.getFileDetail().getEcl();
 			eclCode += "\n\n " + datasetName + " := DATASET(\'" + logicalFile + "\', " + datasetName
@@ -340,30 +309,8 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 			DFUFileDetail dfuFileDetail;
 
 			Platform platform;
-//			HPCCConnection connection = HipieSingleton.getHipie().getHpccManager().getConnections().get(hpccID);
-//			platform = Platform.get((connection.getIsHttps() ? "https" : "http"), connection.getServerHost(),
-//					connection.getServerPort(), connection.getUserName(), connection.getPwd());
-
-//			Version v = platform.getVersion();
-//			System.out.println(v.toString());
-
-//			HPCCWsClient connector = platform.getHPCCWSClient();
 
 			String[] clusterGroups = connector.getAvailableClusterGroups();
-
-			/*
-			 * dfuFileDetail = ((HPCCService)
-			 * SpringUtil.getBean(Constants.HPCC_SERVICE)).getFileDetail(
-			 * logicalFilename,
-			 * dashboardConfig.getDashboard().getHpccConnection(),
-			 * dashboardConfig.getDashboard().getClusterConfig().getThorCluster(
-			 * ));
-			 * 
-			 * String eclCode = "recName :=" + dfuFileDetail.getEcl(); eclCode
-			 * += "\n\n datasetValues := DATASET(\'" + logicalFilename +
-			 * "\', recName, THOR);"; eclCode +=
-			 * "\n\n OUTPUT(datasetValues, NAMED(\'FileData\'));";
-			 */
 
 			WorkunitInfo wu = new WorkunitInfo();
 			wu.setECL(eclBuilderCode);
@@ -591,18 +538,10 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 						}
 					}
 					
-//					HPCCConnection connection =  HipieSingleton.getHipie().getHpccManager().getConnections().get(hpccID);
-					
 					TreeCreation.buildTree(newFolder.getListOfFolders(), tc, Add, connector);
 
 					for (Component titem : tc.getChildren()) {
-						// titem.addEventListener("onClick", e ->
-						// onClickAddChildren(e));
 						titem.addForward("onOpen", treeGrid, "onClickAction");
-						// titem.addForward("onClick", treeGrid,
-						// "onClickAction");
-						// titem.addForward("onSelect", treeGrid,
-						// "onClickAction");
 					}
 					break;
 				}
@@ -622,10 +561,6 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 		return (new DefaultTreeModel<FileMeta>(getFileInfoTreeData(null, "")));
 	}
 
-	/*
-	 * public FileInfoRenderer getTreeRenderer() { return new
-	 * FileInfoRenderer(); }
-	 */
 
 	private void loadChildrenNodes(Event e) {
 		FileMetaTreeNode seltreeNode = ((Treeitem) e.getTarget().getParent()).getValue();
@@ -634,16 +569,10 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 
 		getFileInfoTreeData(seltreeNode.getData(), seltreeNode.getData().getFileName());
 
-		// treeGrid.getModel().getRoot()
-
-		// new FileMetaTreeNode(((FileMeta)seltreeNode.getData()),
-		// getFileInfoTreeData(seltreeNode.getData().getFileName()));
-
 	}
 
 	private FileMetaTreeNode getFileInfoTreeData(FileMeta obj, String currentDir) {
 
-//		HPCCConnection connection = HipieSingleton.getHipie().getHpccManager().getConnections().get(hpccID);
 		FileMeta newFile = new FileMeta();
 		newFile.setFileName("");
 		List<FileMetaTreeNode> rootFile = new ArrayList<FileMetaTreeNode>();
@@ -658,7 +587,6 @@ public class FileBrowserController extends	 SelectorComposer<Component> implemen
 				rootFile.add(innerFile);
 			}
 		} catch (HPCCException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
