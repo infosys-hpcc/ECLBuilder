@@ -18,16 +18,6 @@
 	</scm>
 
 	<distributionManagement>
-		<repository>
-			<id>deployment</id>
-			<name>libs-releases</name>
-			<url>https://mvnrisk.lexisnexis.com/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>deployment</id>
-			<name>libs-snapshots</name>
-			<url>https://mvnrisk.lexisnexis.com/content/repositories/snapshots</url>
-		</snapshotRepository>
 	</distributionManagement>
 	<build>
 		<plugins>
