@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS hpccbuilder; 
+CREATE DATABASE IF NOT EXISTS hpccBuilder; 
   
-USE hpccbuilder;
+USE hpccBuilder;
 
 DROP TABLE IF EXISTS eclbuilderuser;
 
@@ -28,5 +28,5 @@ INSERT INTO eclbuilderuser VALUES(1,'ashoka', 'ashoka');
 INSERT INTO eclbuilderuser VALUES(2,'narasimha', 'narasimha');
 INSERT INTO eclbuilderuser VALUES(3,'bhuvi', 'bhuvi');
 
-ALTER TABLE ramps.eclbuilder CHANGE COLUMN lastmodifieddate lastmodifieddate TIMESTAMP(6) NULL;
+ALTER TABLE hpccBuilder.eclbuilder CHANGE COLUMN lastmodifieddate lastmodifieddate TIMESTAMP(6) NULL;
 
