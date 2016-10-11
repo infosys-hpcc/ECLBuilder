@@ -38,42 +38,11 @@
 	</system-config>
 	-->
 	
-	<!-- Tomcat cluster Handler -->
-	<!-- <listener>
-        <description>Webapp Initializer in Tomcat Clusters</description>
-        <listener-class>org.hpccsystems.dsp.init.ClusterManager</listener-class>
-	</listener> -->
-	
-	<!-- Hipie Service Initializer -->
-	<!-- <listener>
-        <description>Webapp Initializer for HIPIE Service</description>
-        <listener-class>org.hpccsystems.dsp.init.HipieSingleton</listener-class>
-	</listener> -->
-	
-	<!-- Executor Service Initializer -->
     <listener>
 		<description>Webapp Initializer for Executor Service</description>
-		<listener-class>org.hpccsystems.dsp.init.DSPExecutorHolder</listener-class>
+		<listener-class>org.hpccsystems.eclBuilder.init.BuilderExecutorHolder</listener-class>
 	</listener>
 
-<!-- 	<listener>
-		<description>Session Initialization</description>
-		<listener-class>org.hpccsystems.dsp.init.DSPSessionInit</listener-class>
-	</listener>
-	<listener>
-		<description>Session Cleanup</description>
-		<listener-class>org.hpccsystems.dsp.init.DSPSessionCleanup</listener-class>
-	</listener> -->
-	
-	<listener>
-		<description>Warn session timeout</description>
-		<listener-class>org.hpccsystems.dsp.init.TimeoutAlerter</listener-class>
-	</listener>
-	
-	<!-- <listener>
-        <listener-class>org.zkoss.zkplus.cluster.ClusterSessionPatch</listener-class>
-    </listener> -->
-	
 	
 	<error-page>
 	    <exception-type>java.lang.Throwable</exception-type>    

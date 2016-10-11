@@ -15,28 +15,9 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="org.hpccsystems.dsp.webservices" />
+	<context:component-scan base-package="org.hpccsystems.eclBuilder.webservices" />
 	<context:annotation-config/>
 	
-	<util:properties id="wsProperties" location="classpath:webservices.properties"/>
 
-	<!-- <mvc:interceptors>
-		<mvc:interceptor>
-      	<mvc:mapping path="/**" />
-      	<bean class="org.hpccsystems.dsp.webservices.RequestIdSetterInterceptor" />
-      </mvc:interceptor>
-      <mvc:interceptor>
-      	<mvc:mapping path="/**" />
-      	<bean class="org.hpccsystems.dsp.webservices.SslInterceptor" />
-      </mvc:interceptor>
-      <mvc:interceptor>
-      	<mvc:mapping path="/**" />
-      	<bean class="org.hpccsystems.dsp.webservices.MethodVerifierInterceptor" />
-      </mvc:interceptor>
-      <mvc:interceptor>
-      	<mvc:mapping path="/**" />
-      	<bean class="org.hpccsystems.dsp.webservices.AuthenticationInterceptor" />
-      </mvc:interceptor>
-    </mvc:interceptors> -->
 	
 </beans>

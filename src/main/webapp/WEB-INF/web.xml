@@ -51,7 +51,7 @@
 		<url-pattern>/zkau/*</url-pattern>
 	</servlet-mapping>
 	
-	<!--Spring DispatcherServlet to make DSP interact with other appln -->	
+	<!--Spring DispatcherServlet to make ECLBuilder interact with other appln -->	
 	 <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -87,7 +87,7 @@
 	<!-- RequestWrapper mapping for XSS -->
     <filter>
 		<filter-name>RequestWrappingFilter</filter-name>
-		<filter-class>org.hpccsystems.dsp.requestwrapper.RequestWrappingFilter</filter-class>
+		<filter-class>org.hpccsystems.eclBuilder.requestwrapper.RequestWrappingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>RequestWrappingFilter</filter-name>
