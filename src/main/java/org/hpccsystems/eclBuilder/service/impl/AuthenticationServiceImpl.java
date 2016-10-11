@@ -8,14 +8,11 @@ import org.hpccsystems.eclBuilder.Constants;
 import org.hpccsystems.eclBuilder.dao.EClBuilderDao;
 import org.hpccsystems.eclBuilder.entity.User;
 import org.hpccsystems.eclBuilder.exceptions.AuthenticationException;
+import org.hpccsystems.eclBuilder.exceptions.DatabaseException;
 import org.hpccsystems.eclBuilder.service.AuthenticationService;
-import org.hpccsystems.usergroupservice.IUserGroupService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.spring.SpringUtil;
@@ -23,8 +20,6 @@ import org.zkoss.zkplus.spring.SpringUtil;
 @Service("authenticationService")
 @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private static final String INVALID_CREDENTIALS = "invalidCredentials";
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
     private Session getCurrentSession() {
         return Sessions.getCurrent();
@@ -59,7 +54,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
      */
     @Override
     public User fetchUser(String userId, String password, ServletContext context) throws AuthenticationException {
-        IUserGroupService ugsvc = null;
         if (isBlank(userId)) {
             return null;
         }

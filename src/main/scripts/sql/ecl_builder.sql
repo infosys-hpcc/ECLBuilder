@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS ramps; 
   
-USE ramps;
+USE hpccbuilder;
 
 DROP TABLE IF EXISTS eclbuilderuser;
 

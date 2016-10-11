@@ -35,19 +35,6 @@
 		</repository>
 
 		<repository>
-			<id>mvnrisk-releases</id>
-			<name>mvnrisk-releases</name>
-			<url>https://mvnrisk.lexisnexis.com/content/repositories/releases</url>
-		</repository>
-		<repository>
-			<id>mvnrisk-snapshots</id>
-			<name>mvnrisk-snapshots</name>
-			<url>https://mvnrisk.lexisnexis.com/content/repositories/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>oss-sonatype</id>
 			<name>oss-sonatype</name>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
@@ -175,20 +162,6 @@
 
 
 
-		<!-- HIPIE Dependency -->
-		<dependency>
-			<groupId>org.hpccsystems</groupId>
-			<artifactId>hipie</artifactId>
-			<version>1.7.0-rc2-SNAPSHOT</version>
-		</dependency>
-
-		<!-- Dermatology Dependency -->
-		<dependency>
-			<groupId>org.hpccsystems</groupId>
-			<artifactId>dermatology</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -314,6 +287,12 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-tribes</artifactId>
 			<version>8.0.28</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hpccsystems.hpccjapi</groupId>
+			<artifactId>wsclient</artifactId>
+			<version>0.6.6-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

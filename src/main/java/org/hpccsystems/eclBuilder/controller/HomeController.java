@@ -3,7 +3,6 @@ package org.hpccsystems.eclBuilder.controller;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,14 +47,9 @@ import org.zkoss.zul.Window;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
-	private static final String DELETE_CONFIRMATION_DIALOGUE = "deleteConfirmationDialogue";
-	private static final String FA_FA_SORT_AMOUNT_DESC = "fa fa-sort-desc";
-	private static final String FA_FA_SORT_AMOUNT_ASC = "fa fa-sort-asc";
 	private static final String UNABLE_TO_LOAD_DASHBOARD_TEMPLATE = "Unable to load Dashboard template";
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-	private static final String PROMOTE_CONFIRMATION_MESSAGE = "promoteProceedmessage";
-	private static final String PROMOTE_CONFIRMATION_HEADER = "promoteProceed";
 
 	@Wire
 	private Tabbox homeTabbox;
@@ -105,31 +99,12 @@ public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
 	@Wire
 	private Grid entityList;
 
-	private User user;
 	private static final String NEW_DASHBOARD_URI = "/eclBuilder/newECLBuilder.zul";
 
-//	private List<Dashboard> dashboards;
-//	private ListModelList<Dashboard> dashboardModel = new ListModelList<Dashboard>();
-	private static final String DASHBOARD_GRID_PROPERTY = "dashboards";
-	private static final String GRID_SORT_TYPE = "gridSortType";
-	private static final String ASC = "asc";
-	private static final String DES = "des";
-	private static final String PROJECT_STRING = "projects";
-	 
-	private List<String> favDashboards;
-    private ListModelList<Builder> modelList = new ListModelList<Builder>();
-//    ListModelList<Project> projects = new ListModelList<Project>();
-    private List<Builder> gridProjects = new ArrayList<Builder>();
-//    private ProjectGrid projectGrid;
-	
-    
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 
-		user = null;
-		ListModelList<Builder> dummy = new ListModelList<Builder>();
-		
 		String userID = ""; 
 		
 		try{
@@ -215,12 +190,6 @@ public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
 		gridSortDesc(dateItemDashboard, CompositionUtil.SORT_BY_DATE_DES);
 	}*/
 
-	private void showList() {
-		sortMenuBar.setVisible(false);
-		// refreshSortIcons();
-		// clearSelections();
-	}
-	
 	@Listen("onClick = #signOut")
 	public void signOut(){
 		((AuthenticationService) SpringUtil.getBean(Constants.AUTHENTICATION_SERVICE)).logout(new Object());
@@ -279,7 +248,6 @@ public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
 			
 			
 			Row row;
-			Label lab1;
 			Button button1;
 			Div div;
 			for (Builder build : dummy) {
@@ -345,11 +313,6 @@ public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
 		}
 
 	}
-
-	private void generateGridHeader() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return;
-
-    }
 
 	public void cloneECLBuilder(Event e) {
 
@@ -456,7 +419,6 @@ public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
 	}
 
 
-	@SuppressWarnings("unchecked")
 	private void createDashboardTab(Builder builder) {
 		Tab tab = new Tab();
 		tab.setClosable(true);
@@ -522,38 +484,6 @@ public class HomeController extends org.hpccsystems.eclBuilder.HomeComposer  {
 		builder.setName(builderName);
 
 		createDashboardTab(builder);
-	}
-
-
-
-	private void deleteOtherSortTypes(Menuitem item, String toClear) {
-		if (item != nameItemDashboard) {
-			nameItemDashboard.setAttribute(toClear, null);
-		}
-		if (item != authorItemDashboard) {
-			authorItemDashboard.setAttribute(toClear, null);
-		}
-		if (item != dateItemDashboard) {
-			dateItemDashboard.setAttribute(toClear, null);
-		}
-	}
-
-
-	private void setSortIcon(String sort, Menuitem item) {
-		if (sort == null) {
-			item.setSclass("hiddenIcon");
-		} else if (ASC.equals(sort)) {
-			item.setSclass("");
-			item.setIconSclass(FA_FA_SORT_AMOUNT_ASC);
-		} else {
-			item.setSclass("");
-			item.setIconSclass(FA_FA_SORT_AMOUNT_DESC);
-		}
-	}
-
-	private void showErrorNotification(String message) {
-		Clients.showNotification(message, Clients.NOTIFICATION_TYPE_ERROR, getSelf(), Constants.POSITION_TOP_CENTER,
-				5000, true);
 	}
 
 	public void onClickAbout(Event event){

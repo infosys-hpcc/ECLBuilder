@@ -43,6 +43,8 @@ import org.zkoss.zul.Window;
 
 public class BuildECLHistoryController extends SelectorComposer<Component> implements EventListener<Event> {
 
+	private static final long serialVersionUID = 1L;
+	
 	Button openHistory = new Button();
 	@Wire
 	private Tabpanel historyPanel;

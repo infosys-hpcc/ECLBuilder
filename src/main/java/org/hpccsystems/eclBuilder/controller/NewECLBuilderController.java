@@ -34,8 +34,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.Window;
 
-import com.sun.tools.javac.comp.Flow;
-
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class NewECLBuilderController extends SelectorComposer<Component> {
     private static final long serialVersionUID = 1L;
@@ -74,8 +72,6 @@ public class NewECLBuilderController extends SelectorComposer<Component> {
     @Wire
     private Button searchPopbtnDashboard;
 
-    private Flow flow;
-    
     private String userAction = "Create";
     
     private String builderName;

@@ -12,12 +12,10 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hpcc.HIPIE.utils.HPCCConnection;
 import org.hpccsystems.eclBuilder.Constants;
 import org.hpccsystems.ws.client.HPCCWsClient;
 import org.json.CDL;

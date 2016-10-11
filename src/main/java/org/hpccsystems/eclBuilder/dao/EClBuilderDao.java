@@ -1,6 +1,5 @@
 package org.hpccsystems.eclBuilder.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hpccsystems.eclBuilder.controller.Builder;
@@ -24,20 +23,20 @@ public interface EClBuilderDao {
 
 
     String GET_ECL_BUILDERS = "SELECT * FROM (SELECT author,name,logicalFiles,lastmodifieddate, eclbuildercode, datasetFields, hpccConnId,wuid, @builderRank := IF(@curr_builder = name, @builderRank + 1, 1)" +
-    		"AS builderRank, @curr_builder := name FROM hpccBuilder.eclbuilder  ORDER BY name, lastmodifieddate DESC ) ranked    WHERE author = ? and builderRank = 1;";
+    		"AS builderRank, @curr_builder := name FROM hpccbuilder.eclbuilder  ORDER BY name, lastmodifieddate DESC ) ranked    WHERE author = ? and builderRank = 1;";
     
     String GET_ECL_BUILDERS_By_Name = "SELECT * FROM (SELECT author,name,logicalFiles,lastmodifieddate, eclbuildercode, datasetFields, hpccConnId,wuid, @builderRank := IF(@curr_builder = name, @builderRank + 1, 1)" +
-    		"AS builderRank, @curr_builder := name FROM hpccBuilder.eclbuilder where author = ? and  name = ? ORDER BY name, lastmodifieddate DESC ) ranked    WHERE builderRank = 1;";
+    		"AS builderRank, @curr_builder := name FROM hpccbuilder.eclbuilder where author = ? and  name = ? ORDER BY name, lastmodifieddate DESC ) ranked    WHERE builderRank = 1;";
 
-    String GET_ECL_BUILDER = "SELECT * FROM hpccBuilder.eclbuilder WHERE name = ? and wuid != '' order by lastmodifieddate desc";
+    String GET_ECL_BUILDER = "SELECT * FROM hpccbuilder.eclbuilder WHERE name = ? and wuid != '' order by lastmodifieddate desc";
     
-    String ADD_ECL_BUILDERS = "INSERT INTO hpccBuilder.eclbuilder VALUES (?,?,?,?,?,?,?, ?)";
+    String ADD_ECL_BUILDERS = "INSERT INTO hpccbuilder.eclbuilder VALUES (?,?,?,?,?,?,?, ?)";
     
-    String GET_QUERY_BY_WUID = "SELECT * from hpccBuilder.eclbuilder WHERE wuid = ?";
+    String GET_QUERY_BY_WUID = "SELECT * from hpccbuilder.eclbuilder WHERE wuid = ?";
     
-    String UPDATE_ECL_BUILDERS = "UPDATE `hpccBuilder`.`eclbuilder` SET lastmodifieddate = ? ,eclbuildercode = ? , datasetFields = ?  WHERE author = ? and name = ?" ;
+    String UPDATE_ECL_BUILDERS = "UPDATE `hpccbuilder`.`eclbuilder` SET lastmodifieddate = ? ,eclbuildercode = ? , datasetFields = ?  WHERE author = ? and name = ?" ;
     
-    String DELETE_ECL_BUILDERS = "DELETE from `hpccBuilder`.`eclbuilder` where name = ?" ;
+    String DELETE_ECL_BUILDERS = "DELETE from `hpccbuilder`.`eclbuilder` where name = ?" ;
     
     /**
      * DAO query and other constants ends
