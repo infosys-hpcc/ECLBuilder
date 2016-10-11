@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS ramps; 
+CREATE DATABASE IF NOT EXISTS hpccbuilder; 
   
 USE hpccbuilder;
 
