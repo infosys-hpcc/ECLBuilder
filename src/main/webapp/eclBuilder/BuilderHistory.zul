@@ -1,0 +1,53 @@
+<zk xmlns:h="native">
+<h:div apply="org.hpccsystems.eclBuilder.controller.BuildECLHistoryController" style="height:100%;">
+	
+		
+		<h:script type="text/javascript" src="https://www.google.com/jsapi"></h:script>	
+		<h:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.1.0/pivot.min.js"></h:script>	
+		<h:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.1.0/c3_renderers.min.js"></h:script>
+		
+		<h:link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.1.0/pivot.min.css"></h:link>
+        
+  		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  
+  
+  <tabbox id="tabbox" orient="bottom" style="height:100%;" class="historyTab">
+	<tabs id="tabs" sclass="nav nav-pills nav-justified" style="background-color: #00bcd4 !important;">	
+		<tab sclass="nav-link active" label="Builder History"  id="eclHistoryTab" style="color:#fff !important;"/>
+	</tabs>
+	
+	
+	<tabpanels>
+		<tabpanel sclass="tab-pane fade in active" id="historyPanel">
+  			
+	  	</tabpanel>
+		
+    </tabpanels>
+   </tabbox>
+<style>
+	.reportDataGrid .z-row-content{
+		height : 32px !Important;
+	}
+	.reportDataGrid .z-grid-odd  .z-row-inner{
+		background: #E1F5FE !Important;
+	}
+	.z-grid-body table, .z-grid-header table{
+		width:100% !Important;
+	}
+	.historyTab .nav-pills >li.active >a{ 
+		border-bottom : 3px solid Yellow;
+		color : #00796b; background-color : #0d47a1 !important; 
+		}
+		
+		.historyTab .z-tab-selected .z-tab-text { color : #fff; }
+		.historyTab  .z-tab-text { color : #fff; }
+		.z-tabpanel{
+			overflow : auto !important;
+		}
+
+		.z-tabbox-bottom>.z-tabs .z-tabs-content {
+		    border-top: none;
+		}	
+</style>
+</h:div>
+</zk>

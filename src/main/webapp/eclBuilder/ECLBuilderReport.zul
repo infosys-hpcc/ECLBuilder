@@ -1,0 +1,35 @@
+<zk xmlns:h="native">
+	<style>
+		.z-tabpanel{
+			overflow : auto !important;
+		}
+		.outputTabbox .z-tab-text {
+		    color: #fff;
+		}
+		.outputTabbox .z-tab-selected .z-tab-text {
+		    color: #fff;
+		}
+		.gridContent > .z-row-inner
+		{
+		border-right: 1px solid rgb(204, 204, 204);
+		}
+	</style>
+	<h:div apply="org.hpccsystems.eclBuilder.controller.ECLBuildReportComposer">
+	
+	    <h:script type="text/javascript" src="https://www.google.com/jsapi"></h:script>	
+		<h:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.1.0/pivot.min.js"></h:script>	
+		<h:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.1.0/c3_renderers.min.js"></h:script>
+		
+		<h:link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.1.0/pivot.min.css"></h:link>
+        
+  		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  
+  
+  <tabbox id="TabboxComp" class="outputTabbox">
+ 
+    
+    </tabbox>
+  	</h:div>
+  
+  
+</zk>

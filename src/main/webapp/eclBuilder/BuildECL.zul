@@ -1,0 +1,169 @@
+<zk  xmlns:h="native">
+  <window id="DivId"  apply="org.hpccsystems.eclBuilder.controller.BuildECLController" closable="true" 
+  width="100%" height="100%">
+
+  <tabbox id="tabbox"  orient="bottom" height="100%">
+	<tabs id="tabs" sclass="nav nav-pills nav-justified">	
+		<tab label="ECL Builder" id="eclBuilder" sclass="nav-link active"/>
+		<tab label="Outputs" id="eclWatch" disabled="true"/>
+		<tab label="Builder History" id="builderHistory" disabled="true"/>
+	</tabs>
+	
+	
+	<tabpanels> 
+		<tabpanel id="eclBuilderPanel" height="100%" sclass="tab-pane fade in active">
+        <textbox style="cursor:hand;cursor:pointer" name="builderOldCode" class="builderOldCode"  width="100%" height="100%" multiline="true" id="builderOldCode" visible="false" value="" />
+		
+<borderlayout width="100%" height="100%">
+
+  <north border="none" style="background-color: #00796b">
+  			<h:div width="100%" height="80%">
+              <h:div style="float:left;padding:2px;" width="30%" height="100%">
+                     <h:label style="font-size:16px;color:white; margin-left:5px; margin-right:5px;" width="50%" height="100%"> Datasets   </h:label> 
+					 <button id="ImportFiles" class="btn btn-default" iconSclass="glyphicon glyphicon-import"  label="Import" tooltiptext="Import Files" style="margin-top: 0px !Important;background-color:#fafad2"/>
+                </h:div>
+               <hlayout style="float:right;padding:2px;">
+                <menubar id="Actions" visible="false" sclass="sortMenu" style="border-radius: 4px;padding: 1px;background-color:#48D1CC">
+						<menu label="Actions" iconSclass="glyphicon glyphicon-tasks">
+							<menupopup sclass="sortMenuPopup">
+								<menuitem id="joinItembuilder" iconSclass="glyphicon glyphicon-hand-right" label="JOIN" visible="false"></menuitem>
+								<menuitem id="sortItembuilder" iconSclass="glyphicon glyphicon-hand-right" label="SORT"></menuitem>
+								<menuitem id="dedupItembuilder" iconSclass="glyphicon glyphicon-hand-right" label="DEDUP"></menuitem>
+								<menuitem id="distributeItembuilder" iconSclass="glyphicon glyphicon-hand-right" label="DISTRIBUTE"></menuitem>
+								<menuitem id="sampleItembuilder" iconSclass="glyphicon glyphicon-hand-right" label="SAMPLING"></menuitem>
+							</menupopup>
+						</menu>
+					</menubar>
+  				<button id="runECL" class="btn btn-default" iconSclass="glyphicon glyphicon-play-circle" label="Run" style="margin-top: 0px !Important;background-color:#90EE90" />
+  				
+  				</hlayout>
+  			</h:div>
+  			
+    </north>
+    
+    <west collapsible="true"  width="25%" maxsize="450" border="none" flex="true" splittable="true" style="height:100%; background-color:#eee;" >
+    		<vlayout class="treegrid" width="100%" style="height : Inherit !Important;overflow : auto !Important; background-color:#eee;">
+    	   	<tree id="treeGrid" class="treeGrid" width="100%" style="height:Inherit !Important; background-color:#eee; " multiple="true" checkmark="true">
+    		</tree>
+    		</vlayout>
+    </west>
+
+	<center id="centerBorder">
+			<textbox name="builderCode" width="100%" height="100%" multiline="true" id="builderCode" value="" />
+			
+
+    </center>
+    </borderlayout>
+    
+	  	</tabpanel>
+		<tabpanel id="eclWatchPanel" style="overflow:auto !Important;">
+			<include id="eclBuilderInclude" />
+	    </tabpanel>
+	    <tabpanel id="builderHistoryPanel"  style="overflow:auto !Important;">
+			<include id="builderHistoryInclude"/>
+	    </tabpanel>
+	    
+    </tabpanels>
+   </tabbox>
+   
+   	  
+   
+   <script id="codemirrorJS"/>
+   
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	
+	<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="../js/jquery.ui.touch-punch.js"></script>
+	
+	
+	<script>
+
+ <![CDATA[
+        function downlaodContent(wuId, hpccId , resultName) {
+        
+        zAu.send(new zk.Event(zk.Widget.$(jq(a)), 'onLoadBox', a.value));
+        
+        	/*$('<form>').attr({
+        		action: "downloadECLDataReport.do"
+        	})
+        	.append('<input type="hidden" name="hpccId" value='+hpccId+'>')
+        	.append('<input type="hidden" name="wuId" value='+wuId+'>')
+        	.append('<input type="hidden" name="resultName" value='+resultName+'>')
+        	.submit();
+        	return true;
+            $.ajax({
+                url: "downloadECLDataReport.do",
+                data : {"hpccId" : hpccId, "wuId" : wuId, "resultName" : resultName },
+                type: "post",
+                // callback handler that will be called on success
+                success: function(response, textStatus, jqXHR){
+                window.open(response);
+                		alert('hi');
+     			}error: function (XMLHttpRequest, textStatus, errorThrown) 
+				    	{
+					        alert('Error occurred while opening File template');
+					    }
+            	});*/
+        	}
+    ]]></script>
+    
+    <style>
+   		 .nav-pills >li.active >a{ 
+		border-bottom : 6px solid #ADFF2F;
+		color : #00796b; background-color : #0d47a1 !important; 
+		}
+		.treeGrid > .z-vlayout-inner{
+		   		height : Inherit !Important;
+    			overflow : auto !Important;
+		}
+		.z-tree-body{
+			height : Inherit !Important;
+		}
+		.z-icon-caret-right{
+			visibility:hidden !Important;
+		}
+		.reportDataGrid > .z-treecell-content, .z-treefooter-content {
+			background-color : White !Important;
+		}
+		.reportDataGrid > .z-treecell-text {
+			color : black !Important;
+		}
+		
+		.z-paging-text, .z-paging-info{
+		color : Blue !Important;
+		}
+		.z-paging{
+			background-color: #F5F5F5 !Important; 
+		}
+		
+    	
+    	.reportDataGrid .z-column-content {
+    		color: #333;
+      	    background-color: #039BE5 !Important;
+		}
+    	
+    	.reportDataGrid .z-grid-odd  .z-row-inner{
+    		background: #E1F5FE !Important;
+		}
+    	
+    	.z-grid-body table, .z-grid-header table{
+			width:100% !Important;
+		}
+		
+		.z-menu-content {
+			padding-top:0px;
+		}
+		img{
+			height:20px !important;
+			}
+		.z-tabpanel{
+			overflow : auto !important;
+		}
+		.z-treerow{
+			 background-color:#eee;
+			 }
+    </style>
+  </window>
+	
+</zk>

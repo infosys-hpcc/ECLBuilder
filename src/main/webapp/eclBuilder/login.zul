@@ -1,0 +1,43 @@
+<zk>
+<style src="/css/bootstrap/css/bootstrap.min.css"></style>
+<style src="/css/font-awesome/css/font-awesome.min.css"></style>
+
+ <style>
+	 .z-page{
+		background : url("../images/ECLBuilder_logo.jpg") rgba(0,0,0,0) no-repeat fixed center !Important;
+		
+	} 
+	.z-modal-mask{
+	background : rgba(0,0,0,0) !Important;
+	}
+	
+	
+</style>
+
+<window border="normal" apply="org.hpccsystems.eclBuilder.controller.LoginController" 
+	title="Login" id="loginWindow" hflex="1" vflex="2" mode="modal" draggable="false"
+	forward="onCancel=onClose">
+	
+	<vbox hflex="1" id="loginDiv" spacing="10px" style="opacity: 0.9 !Important">
+		<hlayout id="loginDiv1" style="opacity: 0.9  !Important">
+			<vlayout id="loginDiv2" class="loginDiv" style="opacity: 0.9  !Important">
+				<vlayout vflex="1" width="300px">
+					<label>Username</label>
+					<textbox id="userName" hflex="1" vflex="1" class="form-control"></textbox>
+					<label>Password</label>
+					<textbox id="password" type="password" hflex="1" vflex="1" class="form-control"></textbox>	
+					<label id="ErrorMsg" value="" visible="false"/>
+				</vlayout>
+			</vlayout>
+		</hlayout>
+		<space></space>
+		<hlayout style="float:right">
+			<button label="Login " id="loginBtn" class="btn btn-default" iconSclass="glyphicon glyphicon-circle-arrow-right" />
+			<button id="closeProjectDialog" label="${labels.cancel}" class="btn btn-default" iconSclass="glyphicon glyphicon-remove-sign" >
+			</button>
+		</hlayout>
+
+	</vbox>
+	
+</window>
+</zk>

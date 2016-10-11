@@ -1,0 +1,64 @@
+<window id="clusterConfigWindow" apply="org.hpccsystems.eclBuilder.controller.ClusterConfigController" closable="true" width="700px"
+	vflex="1" title="Cluster Configuration">
+	<vlayout>
+		<hlayout >
+			<grid >
+				<rows>
+					<row>
+						<cell>
+							<label> IP </label>
+						</cell>
+						<cell>
+							<textbox sclass="form-control" id="eclBuilderPlatformIp"></textbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label> Enter the platform connection user name </label>
+						</cell>
+						<cell>
+							<textbox sclass="form-control" id="eclBuilderPlatformUserID"></textbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label>Port</label>
+						</cell>
+						<cell>
+							<textbox sclass="form-control" id="eclBuilderPlatformPort"></textbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label> Password </label>
+						</cell>
+						<cell>
+							<textbox sclass="form-control" id="eclBuilderPlatformPassWord" type="password"></textbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label>Is SSL to be enabled?</label>
+						</cell>
+						<cell>
+							<radiogroup id="isSSLEnabled">
+								<radio  radiogroup="isSSLEnabled" id="trueRadio" label="true" style="margin-right:15px;">  </radio>
+								<radio  radiogroup="isSSLEnabled" selected="true" label="false" id="falseRadio">  </radio>
+							</radiogroup>
+						</cell>
+					</row>
+					
+				</rows>
+			</grid>
+		</hlayout>
+		<hlayout style="float:right;">
+			<button id="cancelBtn" label="Cancel"
+				class="btn btn-default"
+				iconSclass="glyphicon glyphicon-remove-sign" />
+			<button id="submitButton" label="Continue"
+				class="btn btn-default"
+				iconSclass="glyphicon glyphicon-circle-arrow-right" />
+		</hlayout>
+	</vlayout>
+	<style>td, th { padding: 0; text-align: left; }</style>
+</window>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<zk xmlns:h="native">
+	<script id="codemirrorJS" src="/eclBuilder/js/codemirror.js" />
+	<?link rel="stylesheet" type="text/css" href="/css/codemirror.css"?>
+	<?link rel="stylesheet" type="text/css" href="/css/main.css"?>
+	<style
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	</style>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	</script>
+	
+		<h:link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css"/>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+	<style>
+			.nav-pills >li.active >a{ 
+		border-bottom : 3px solid Yellow;
+		color : #00796b; background-color : #0d47a1 !important; 
+		}
+		.nav-justified{ background-color: #cde5e3 !important } 
+		a{ color
+		: #00796b;
+
+		} 
+		.nav-justified>li>a{ font-weight: 700 !important; }
+
+		 .z-tab-selected,.z-tab{ background-color : #0d47a1; }
+		 .z-tabbox-top>.z-tabs .z-tabs-content{ border : none; height: 35px;}
+		 .z-tabbox-top>.z-tabs .z-tab.z-tab-selected{
+		border-bottom: 3px solid Yellow; height: 35px;} 
+		.z-tabbox-bottom>.z-tabs .z-tab.z-tab-selected{
+		border-bottom: 3px solid Yellow; height: 35px;} 
+		 .z-tab-selected :hover, .z-tab:hover{ background-color : none; } 
+		 .z-tab{ border : none; background : none; } 
+		 .home .z-tab-selected .z-tab-text { color : #00796b; }
+		 .home .z-tab-text{
+			color : #00796b;
+		}
+		.gridContent{
+			background-color : #fff;
+		}
+		.gridContent > .z-row-inner:first-of-type {
+			background-color: #fff;
+		}
+
+		.gridContent:hover > .z-row-inner:first-of-type {
+			background-color: rgb(238, 238, 238);
+		}
+		.z-window-header{
+			background-color : #00796b;
+		}
+
+		.z-tab:hover {
+		    background: none;
+		}
+		.z-tab-selected:hover {
+		    background: none;    
+		}
+		
+		.z-column-content{
+			background-color : #cde5e3;
+		}
+		
+		.z-treecell-content:hover{
+			background-color : #cde5e3;
+			color : #00796b !important;
+		}
+		.z-tabpanel{
+			overflow : auto !important;
+			border : none !important;
+		}
+		.z-tab a, .z-tab-selected a {
+	    text-decoration: none !important;
+	}
+		.z-tab-disabled {
+		    background: #e3e3e3 !important;
+		    opacity: 1;
+		    filter: alpha(opacity=100);
+		    cursor: default;
+		}
+		.z-listheader {
+    		background-color: #568E56;
+    	}
+    	.z-tree {
+    		 border: none;
+    	} 
+	</style>
+
+	<div class="home"
+		apply="org.hpccsystems.eclBuilder.controller.HomeController"
+		vflex="1">
+				<div width="100%" style="background-color: #00796b; font-weight:700; color:#fff; font-size:16px;height: 45px;position: fixed;min-height: 55px;" >
+					<div  style="padding:10px; float:left;">
+						<label style="font-size:16px;"> ECL Builder </label>
+					</div>
+					<div style="float: right;padding:8px;">
+						<button id="clusterConfig"
+										iconSclass="glyphicon glyphicon-cog" autodisable="true"
+										class="btn btn-default" style="background-color:#FFC0CB;"
+										label="Preferences" />
+						<button id="signOut"
+										iconSclass="glyphicon glyphicon-log-out" autodisable="true"
+										class="btn btn-default" style="background-color:#66CDAA;"
+										label="SignOut" />
+						<button id="aboutBtn"
+										iconSclass="glyphicon glyphicon-question-sign" autodisable="true"
+										class="btn btn-default" style="background-color:#f0e68c;"
+										label="About" />
+					</div>
+				</div>
+				<div height="92%" style="min-height: 90%;top: 50px;position: fixed; width: 100%; " id="homeTabboxDiv">
+				<tabbox id="homeTabbox" vflex="1" hflex="1">
+					<tabs sclass="nav nav-pills nav-justified">
+						<tab sclass="nav-link active"
+							label="${labels.browsebuilder}" id="homeTab">
+						</tab>
+					</tabs>
+
+					<tabpanels>
+						<tabpanel sclass="tab-pane fade in active">
+							<vlayout vflex="1">
+
+								<hbox hflex="1" pack="end"
+									spacing="1px">
+									<button id="newEclBuilder"
+										iconSclass="z-icon-plus" autodisable="true"
+										class="btn btn-default" style="margin-right:5px;background-color:#d2d2fa;"
+										label="${labels.newEclBuilder}" />
+									<button id="moreOptions"
+										iconSclass="z-icon-times" autodisable="true"
+										label="${labels.moreFunctions}" visible="false" />
+									<menubar sclass="sortMenu"
+										visible="false">
+										<menu label="View"
+											id="viewMenu">
+											<menupopup
+												sclass="sortMenuPopup">
+												<menuitem
+													id="compoCreatedMenu" iconSclass="fa fa-user"
+													label="${labels.buildersCreatedByMe}">
+												</menuitem>
+												<menuitem
+													id="sharedCompoMenu" iconSclass="fa fa-users"
+													label="${labels.buildersSharedWithMe}">
+												</menuitem>
+												<menuitem
+													id="favCompomenu" iconSclass="fa fa-star"
+													label="${labels.builderFav}">
+												</menuitem>
+												<menuitem
+													id="mostAccessedCompomenu" iconSclass="fa fa-wifi"
+													label="${labels.mostAccessedbuilder}">
+												</menuitem>
+												<menuitem
+													id="allCompoMenu" iconSclass="fa fa-list-ul"
+													label="${labels.allbuilders}">
+												</menuitem>
+											</menupopup>
+										</menu>
+									</menubar>
+								</hbox>
+
+								<grid mold="paging" vflex="1" sclass="gridContent"
+									id="entityList" autopaging="true" visible="true"
+									emptyMessage="${labels.noCompositionAvailable}">
+									<columns></columns>
+									<rows></rows>
+								</grid>
+
+
+								<hlayout sclass="viewSelector">
+									<radiogroup
+										id="viewSelectRadioGroup" visible="false">
+										<radio id="toggleGridView"
+											label="${labels.gridview}" sclass="viewSelectorRadioButton" />
+										<radio id="toggleListView"
+											label="${labels.listview}" sclass="viewSelectorRadioButton" />
+									</radiogroup>
+								</hlayout>
+							</vlayout>
+						</tabpanel>
+					</tabpanels>
+				</tabbox> 
+				</div>
+	</div>
+</zk>

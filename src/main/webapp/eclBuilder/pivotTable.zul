@@ -1,0 +1,80 @@
+<zk  xmlns:h="native">
+<window closable="true" 
+	title="Pivot View of Data" width="90%" height="75%" class="PivotWindow" apply="org.hpccsystems.eclBuilder.controller.PivotTableController">
+	<h:script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></h:script>
+	<h:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></h:script>
+	<h:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></h:script>
+	<h:div style="height:Inherit !Important; overflow:scroll !Important;">
+	 <h:title>Pivot Demo</h:title>
+        <!-- external libs from cdnjs -->
+
+        <!-- PivotTable.js libs from /pivotwebapp -->
+ 
+        <h:style>
+            body {font-family: Verdana;}
+        </h:style>
+        
+        <!-- optional: mobile support with jqueryui-touch-punch -->
+        
+        <!-- for examples only! script to show code to user -->
+
+
+  		
+  		   <style>
+            body {font-family: Verdana;}
+
+        .c3-line, .c3-focused {stroke-width: 3px !important;}
+        .c3-bar {stroke: white !important; stroke-width: 1;}
+        .c3 text { font-size: 12px; color: grey;}
+        .tick line {stroke: white;}
+        .c3-axis path {stroke: grey;}
+        .c3-circle { opacity: 1 !important; }
+        </style>
+  
+
+    <hbox  visible="true" style="overflow : scroll !Important;">
+    
+    <h:body >
+	<div id="output" class="output" />
+    </h:body>
+  
+    </hbox>
+      </h:div>
+    </window>
+    <script>
+    
+ <![CDATA[
+        function loadContent2(wuId, hpccId , resultName, platformJsonString) {
+            $.ajax({
+                url: "/ECLBuilder/jsonECLRun.do",
+                data : {"hpccId" : hpccId, "wuId" : wuId, "resultName" : resultName, "platformJsonString" : platformJsonString },
+                type: "post",
+                // callback handler that will be called on success
+                success: function(response, textStatus, jqXHR){
+                		try{
+                		var json1 = jQuery.parseJSON(response);
+                		var json = json1.formHtml;
+	
+				        var derivers = $.pivotUtilities.derivers;
+				        var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.c3_renderers);
+			        
+                		data = JSON.parse(json);
+	                		$(".output").pivotUI(data, {
+					               renderers: renderers,
+						                derivedAttributes: {
+						                    "Age Bin": derivers.bin("Age", 10),
+						                    "Gender Imbalance": function(mp) {
+						                        return mp["Gender"] == "Male" ? 1 : -1;
+						                    }
+						                },
+						                cols: ["Age Bin"], rows: ["Gender"],
+						                rendererName: "Area Chart"
+					            });
+                		}catch(e){
+                		alert(e);
+                		}
+     					}
+            	});
+        	}
+    ]]></script>
+   </zk>

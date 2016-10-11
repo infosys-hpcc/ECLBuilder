@@ -1,0 +1,50 @@
+<window id="distributeWindow"  apply="org.hpccsystems.eclBuilder.controller.DistributeController" closable="true"   
+  hflex="1" vflex="1" title="Distribute">
+  <vlayout>
+    <hlayout>
+    	<!-- <listbox id="distrMethod" height="500px" width="300px">
+              <listhead>
+        		<listheader label="Hashing Method for Distribution" />
+    		</listhead>
+    		<listitem>
+    			<listcell>
+    				<radiogroup>
+    					 <radio label="HASH8" style="margin-right:3px;"></radio>
+    					 <radio label="HASH16" style="margin-right:3px;"></radio>
+    					 <radio label="HASH32" style="margin-right:3px;"></radio>
+    				</radiogroup>
+    			</listcell>
+    		</listitem>
+        </listbox>
+        
+        <separator orient="horizontal" spacing="10px" /> -->
+        
+        <listbox id="datasetsForSort" height="500px" width="350px" style="text-align:left"
+             oddRowSclass="non-odd">
+             <listhead>
+        		<listheader label="Datasets"/>
+    		</listhead>
+        </listbox>
+        
+         <separator orient="horizontal" spacing="10px" />
+        
+        <listbox id="colForDistr" height="500px" width="350px">
+              <listhead>
+        		<listheader label="Column for Distribute" />
+    		</listhead>
+    		<listitem>
+    		</listitem>
+        </listbox>
+    </hlayout>
+     <hlayout style="float:right;">
+     <button id="cancelDistribute" label="Cancel" class="btn btn-default" iconSclass="glyphicon glyphicon-remove-sign"/>
+	<button id="submitButton" label="Submit" class="btn btn-default" iconSclass="glyphicon glyphicon-circle-arrow-right"/>
+    </hlayout>
+    </vlayout>
+    <style>
+    	td, th {
+    		padding: 0;
+    		text-align: left;
+		}
+	</style>
+</window> 
