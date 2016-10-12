@@ -17,13 +17,15 @@ CREATE TABLE eclbuilder (
   name varchar(45) NOT NULL,
   logicalFiles varchar(2000) DEFAULT NULL,
   lastmodifieddate TIMESTAMP,
-  eclbuildercode blob,
+  eclbuildercode varchar DEFAULT '',
   hpccConnId varchar(45) DEFAULT NULL,
   wuid varchar(45) DEFAULT NULL,
-  datasetFields blob
+  datasetFields varchar DEFAULT '',
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO eclbuilderuser VALUES(0,'raja', 'raja');
 INSERT INTO eclbuilderuser VALUES(1,'ashoka', 'ashoka');
 INSERT INTO eclbuilderuser VALUES(2,'narasimha', 'narasimha');
 INSERT INTO eclbuilderuser VALUES(3,'bhuvi', 'bhuvi');
+INSERT INTO eclbuilderuser VALUES(3,'arjuna', 'arjuna');
+INSERT INTO eclbuilderuser VALUES(3,'user1', 'user1pw');

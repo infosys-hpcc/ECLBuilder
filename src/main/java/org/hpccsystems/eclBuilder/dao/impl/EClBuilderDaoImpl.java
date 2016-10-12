@@ -70,17 +70,8 @@ public class EClBuilderDaoImpl implements EClBuilderDao {
 //            	build.setLastmodifieddate(resultset.getDate("lastmodifieddate"));
             	build.setTimestamp(resultset.getTimestamp("lastmodifieddate"));
             	
-            	Blob blob = ((Blob)resultset.getBlob("eclbuildercode"));
-            	byte[] bdata = blob.getBytes(1, (int) blob.length());
-            	build.setEclbuildercode(new String(bdata));
-            	blob = (Blob)resultset.getBlob("datasetFields");
-            	if(blob != null){
-            		byte[] bdataNew = blob.getBytes(1, (int) blob.length());
-            		build.setDsFields(new String(bdataNew));
-            	}else{
-            		build.setDsFields("");
-            	}
-            	
+            	build.setEclbuildercode(resultset.getString("eclbuildercode"));
+            	build.setDsFields(resultset.getString("datasetFields"));
             	build.setHpccId(resultset.getString("hpccConnId"));
             	build.setWuID(resultset.getString("wuid"));
                 LOGGER.debug("derm ----{}", build);
