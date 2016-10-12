@@ -18,21 +18,21 @@ import org.hpccsystems.eclBuilder.exceptions.DatabaseException;
 public interface EClBuilderDao {
 
     
-    String FETCH_USER = "SELECT * FROM ECLBUILDERUSER WHERE USERID = ? AND PASSWORD = ?";
+    String FETCH_USER = "SELECT * FROM eclbuilderuser WHERE userid = ? AND password = ?";
     
-    String GET_ECL_BUILDERS = "SELECT * FROM hpccbuilder.eclbuilder WHERE author = ?  ORDER BY name, lastmodifieddate DESC ";
+    String GET_ECL_BUILDERS = "SELECT * FROM eclbuilder WHERE author = ?  ORDER BY name, lastmodifieddate DESC ";
     
-    String GET_ECL_BUILDERS_By_Name = "SELECT * FROM hpccbuilder.eclbuilder WHERE author = ? and name = ? ORDER BY name, lastmodifieddate DESC ";
+    String GET_ECL_BUILDERS_By_Name = "SELECT * FROM eclbuilder WHERE author = ? and name = ? ORDER BY name, lastmodifieddate DESC ";
 
-    String GET_ECL_BUILDER = "SELECT * FROM hpccbuilder.eclbuilder WHERE name = ? and wuid != '' order by lastmodifieddate desc";
+    String GET_ECL_BUILDER = "SELECT * FROM eclbuilder WHERE name = ? and wuid != '' order by lastmodifieddate desc";
     
-    String ADD_ECL_BUILDERS = "INSERT INTO hpccbuilder.eclbuilder VALUES (?,?,?,?,?,?,?, ?)";
+    String ADD_ECL_BUILDERS = "INSERT INTO eclbuilder VALUES (?,?,?,?,?,?,?, ?)";
     
-    String GET_QUERY_BY_WUID = "SELECT * from hpccbuilder.eclbuilder WHERE wuid = ?";
+    String GET_QUERY_BY_WUID = "SELECT * from eclbuilder WHERE wuid = ?";
     
-    String UPDATE_ECL_BUILDERS = "UPDATE `hpccbuilder`.`eclbuilder` SET lastmodifieddate = ? ,eclbuildercode = ? , datasetFields = ?  WHERE author = ? and name = ?" ;
+    String UPDATE_ECL_BUILDERS = "UPDATE eclbuilder SET lastmodifieddate = ? ,eclbuildercode = ? , datasetFields = ?  WHERE author = ? and name = ?" ;
     
-    String DELETE_ECL_BUILDERS = "DELETE from `hpccbuilder`.`eclbuilder` where name = ?" ;
+    String DELETE_ECL_BUILDERS = "DELETE from eclbuilder where name = ?" ;
     
     /**
      * DAO query and other constants ends

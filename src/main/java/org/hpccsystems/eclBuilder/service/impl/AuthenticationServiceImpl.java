@@ -64,6 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user = ((EClBuilderDao) SpringUtil.getBean("EClBuilderDao")).fetchUser(userId, password);
         
         }catch(Exception e){
+        	e.printStackTrace();
         	user = null;
         }
         

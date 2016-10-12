@@ -191,6 +191,7 @@ public class EClBuilderDaoImpl implements EClBuilderDao {
 		try{
 			return (getJdbcTemplate().query(FETCH_USER, new Object[] {userId, password }, fetchUserExtactor));
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}
 	}
