@@ -20,8 +20,6 @@ public interface EClBuilderDao {
     
     String FETCH_USER = "SELECT * FROM ECLBUILDERUSER WHERE USERID = ? AND PASSWORD = ?";
     
-
-
     String GET_ECL_BUILDERS = "SELECT * FROM hpccbuilder.eclbuilder WHERE author = ?  ORDER BY name, lastmodifieddate DESC ";
     
     String GET_ECL_BUILDERS_By_Name = "SELECT * FROM hpccbuilder.eclbuilder WHERE author = ? and name = ? ORDER BY name, lastmodifieddate DESC ";
