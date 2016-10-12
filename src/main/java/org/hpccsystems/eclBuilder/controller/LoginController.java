@@ -1,16 +1,12 @@
 package org.hpccsystems.eclBuilder.controller;
 
-import java.io.IOException;
-
 import org.hpccsystems.eclBuilder.HomeComposer;
 import org.hpccsystems.eclBuilder.entity.User;
-import org.hpccsystems.eclBuilder.exceptions.AuthenticationException;
 import org.hpccsystems.eclBuilder.service.AuthenticationService;
 import org.hpccsystems.eclBuilder.service.ClusterConfigurationService;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -47,7 +43,7 @@ public class LoginController extends HomeComposer {
 	}
 
 	@Listen("onOK=#password; onClick=#loginBtn")
-	public void onLogin() throws IOException {
+	public void onLogin() throws Exception {
 
 		AuthenticationService authenticationService = ((AuthenticationService) SpringUtil
 				.getBean("authenticationService"));
@@ -58,14 +54,13 @@ public class LoginController extends HomeComposer {
 			if (user != null) {
 				Executions.sendRedirect("/eclBuilder/home.zul");
 			} else {
-				ErrorMsg.setValue("Invalide Credentials provided! Please check!");
+				ErrorMsg.setValue("Invalid Credentials provided! Please check!");
 				ErrorMsg.setVisible(true);
 			}
-			
-
-		} catch (WrongValueException | AuthenticationException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 		
 		ClusterConfigurationService clusterConfigurationService = (ClusterConfigurationService) SpringUtil

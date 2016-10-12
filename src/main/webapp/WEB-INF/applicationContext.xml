@@ -6,26 +6,7 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="org.hpccsystems.eclBuilder.service.impl, org.hpccsystems.eclBuilder.dao.impl" >
-	</context:component-scan>
+	<context:component-scan base-package="org.hpccsystems.eclBuilder.service.impl, org.hpccsystems.eclBuilder.dao.impl org.hpccsystems.eclBuilder.init" >
+	</context:component-scan>	
 	
-	
-	<bean id="mySQLDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hpccbuilder" />
-		<property name="user" value="root" />
-		<property name="password" value="password" />
-		<!--   controlling pool size -->
-		<property name="maxPoolSize" value="50" />
-		<property name="minPoolSize" value="10" />
-		<property name="maxIdleTimeExcessConnections" value="1800" />
-		<!--   Testing the  connection to avoid stale/dead connections -->
-		<property name="testConnectionOnCheckout" value="true" />
-		<property name="preferredTestQuery" value="SELECT 1" />
-		<!--   enable caching of statements to improve the performance -->
-		<property name="maxStatements" value="100" />
-	</bean> 
-	
-
 </beans>

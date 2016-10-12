@@ -96,7 +96,7 @@ public class EClBuilderDaoImpl implements EClBuilderDao {
     }
 
     @Autowired
-    @Qualifier("mySQLDataSource")
+    @Qualifier("h2Datasource")
     public void setDataSourceToJdbcTemplate(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }

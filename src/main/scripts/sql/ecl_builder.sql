@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS hpccBuilder; 
+CREATE DATABASE IF NOT EXISTS hpccbuilder;
   
-USE hpccBuilder;
+USE hpccbuilder;
 
 DROP TABLE IF EXISTS eclbuilderuser;
 
@@ -16,7 +16,7 @@ CREATE TABLE eclbuilder (
   author varchar(45) NOT NULL,
   name varchar(45) NOT NULL,
   logicalFiles varchar(2000) DEFAULT NULL,
-  lastmodifieddate datetime DEFAULT NULL,
+  lastmodifieddate TIMESTAMP,
   eclbuildercode blob,
   hpccConnId varchar(45) DEFAULT NULL,
   wuid varchar(45) DEFAULT NULL,
@@ -27,6 +27,3 @@ INSERT INTO eclbuilderuser VALUES(0,'raja', 'raja');
 INSERT INTO eclbuilderuser VALUES(1,'ashoka', 'ashoka');
 INSERT INTO eclbuilderuser VALUES(2,'narasimha', 'narasimha');
 INSERT INTO eclbuilderuser VALUES(3,'bhuvi', 'bhuvi');
-
-ALTER TABLE hpccBuilder.eclbuilder CHANGE COLUMN lastmodifieddate lastmodifieddate TIMESTAMP(6) NULL;
-

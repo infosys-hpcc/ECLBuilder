@@ -3,3 +3,5 @@
 /.project
 /.classpath
 /bin/
+/hpccbuilder.trace.db
+/hpccbuilder.mv.db
