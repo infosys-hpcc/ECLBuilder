@@ -22,11 +22,9 @@ public interface EClBuilderDao {
     
 
 
-    String GET_ECL_BUILDERS = "SELECT * FROM (SELECT author,name,logicalFiles,lastmodifieddate, eclbuildercode, datasetFields, hpccConnId,wuid, @builderRank := IF(@curr_builder = name, @builderRank + 1, 1)" +
-    		"AS builderRank, @curr_builder := name FROM hpccbuilder.eclbuilder  ORDER BY name, lastmodifieddate DESC ) ranked    WHERE author = ? and builderRank = 1;";
+    String GET_ECL_BUILDERS = "SELECT * FROM hpccbuilder.eclbuilder WHERE author = ?  ORDER BY name, lastmodifieddate DESC ";
     
-    String GET_ECL_BUILDERS_By_Name = "SELECT * FROM (SELECT author,name,logicalFiles,lastmodifieddate, eclbuildercode, datasetFields, hpccConnId,wuid, @builderRank := IF(@curr_builder = name, @builderRank + 1, 1)" +
-    		"AS builderRank, @curr_builder := name FROM hpccbuilder.eclbuilder where author = ? and  name = ? ORDER BY name, lastmodifieddate DESC ) ranked    WHERE builderRank = 1;";
+    String GET_ECL_BUILDERS_By_Name = "SELECT * FROM hpccbuilder.eclbuilder WHERE author = ? and name = ? ORDER BY name, lastmodifieddate DESC ";
 
     String GET_ECL_BUILDER = "SELECT * FROM hpccbuilder.eclbuilder WHERE name = ? and wuid != '' order by lastmodifieddate desc";
     
