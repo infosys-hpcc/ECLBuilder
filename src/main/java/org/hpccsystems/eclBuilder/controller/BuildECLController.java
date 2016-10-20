@@ -137,7 +137,9 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 	@Wire
 	private Menubar Actions;
 
-	private String logicalFilesForBuilder = "";
+	private String logicalFilesForBuilder = StringUtils.EMPTY;
+	
+	private String completeLogiFilPathinBuilder = StringUtils.EMPTY;
 
 	private String eclBuilderName;
 
@@ -145,7 +147,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 	private JSONObject datasetFieldsDts;
 
-	private String wuID = "";
+	private String wuID = StringUtils.EMPTY;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -190,7 +192,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 		platform = TreeController.getPlatformForCluster();
 
 		connector = platform.getHPCCWSClient();
-		Folder rootFolder = TreeCreation.populateTree("", connector, hpccID);
+		Folder rootFolder = TreeCreation.populateTree(StringUtils.EMPTY, connector, hpccID);
 		Treechildren rootChildren = new Treechildren();
 
 		Treeitem treeItem = new Treeitem();
@@ -232,7 +234,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 				for (int i = 0; i < datasets.length(); i++) {
 
-					logicalFilesForBuilder += (logicalFilesForBuilder.length() > 0 ? "," : "")
+					logicalFilesForBuilder += (logicalFilesForBuilder.length() > 0 ? "," : StringUtils.EMPTY)
 							+ ((JSONObject) datasets.get(i)).keys().next().toString();
 				}
 
@@ -293,7 +295,9 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 			if (eclBuilders.size() > 0) {
 				Builder builder = eclBuilders.get(0);
 				builderCode.setValue(builder.getEclbuildercode());
-				logicalFilesForBuilder = builder.getLogicalFiles();
+				 JSONObject tempJson = new JSONObject(cloningBuilder.getLogicalFiles());
+				logicalFilesForBuilder = tempJson.getString("logicalFilesForBuilder");
+				completeLogiFilPathinBuilder = tempJson.getString("listOfFiles");
 				// joinItembuilder.setVisible(Arrays.asList(logicalFilesForBuilder.split(",")).size()
 				// > 0 ? true : false);
 				// Actions.setVisible(Arrays.asList(logicalFilesForBuilder.split(",")).size()
@@ -316,17 +320,39 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 	@Listen("onDrop=#builderCode")
 	public void onDropEventbuilderCode(Event e) throws JSONException {
-		List<String> files = new ArrayList<String>();
+//		List<String> files = new ArrayList<String>();
 		Treeitem fileToAdd = ((Treeitem) ((DropEvent) e).getDragged());
 		String tempStrArr[] = fileToAdd.getValue().toString().split("::");
 
-		String datasetName = tempStrArr[tempStrArr.length - 1].replaceAll("[^A-Za-z_]+", "");
-		files.add(fileToAdd.getValue());
-		if (Arrays.asList(logicalFilesForBuilder.split(",")).contains(datasetName)) {
-			Clients.showNotification("This file is Already added!!!");
-
-			return;
+		String datasetName = tempStrArr[tempStrArr.length - 1].replaceAll("[^A-Za-z_]+", StringUtils.EMPTY);
+		
+		if(Arrays.asList(logicalFilesForBuilder.split(",")).contains(datasetName)){
+			
+			final String temp = datasetName;
+			
+			List matchedNames = (Arrays.asList(logicalFilesForBuilder.split(","))).stream().filter(listItem -> ((String)listItem).replaceAll("[^A-Za-z_]+", StringUtils.EMPTY).equals(temp)).collect(Collectors.toList());
+			
+			if(matchedNames.size() > 0) {
+				datasetName += StringUtils.EMPTY + matchedNames.size();
+			}
+			
 		}
+//		files.add(fileToAdd.getValue());
+	
+//		if (Arrays.asList(logicalFilesForBuilder.split(",")).contains(datasetName)) {
+			
+			if(completeLogiFilPathinBuilder.contains(fileToAdd.getValue().toString())){
+			
+				Clients.showNotification("This file is Already added!!!");
+	
+				return;
+				
+			}
+//		}
+		
+		completeLogiFilPathinBuilder += (completeLogiFilPathinBuilder.length() > 0 ? "," : StringUtils.EMPTY ) + fileToAdd.getValue().toString();
+		
+
 
 		fileToAdd.getChildren().stream().filter(comp -> comp.isVisible());
 
@@ -353,7 +379,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 		datasetFieldsDts.append("datasets", dsJson);
 
-		logicalFilesForBuilder += (org.apache.commons.lang.StringUtils.isNotEmpty(logicalFilesForBuilder) ? "," : "")
+		logicalFilesForBuilder += (org.apache.commons.lang.StringUtils.isNotEmpty(logicalFilesForBuilder) ? "," : StringUtils.EMPTY)
 				+ datasetName;
 
 		if (Arrays.asList(logicalFilesForBuilder.split(",")).size() > 1) {
@@ -379,7 +405,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 		if (tableActionRequested) {
 
 			logicalFilesForBuilder += (org.apache.commons.lang.StringUtils.isNotEmpty(logicalFilesForBuilder) ? ","
-					: "") + "table" + datasetName;
+					: StringUtils.EMPTY) + "table" + datasetName;
 
 			dsJson = new JSONObject();
 
@@ -390,12 +416,12 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 		TableStr += "});";
 
-		TableStr += "\n\nOUTPUT(" + (tableActionRequested ? "table" : "") + datasetName + ", NAMED(\'" + "table"
+		TableStr += "\n\nOUTPUT(" + (tableActionRequested ? "table" : StringUtils.EMPTY) + datasetName + ", NAMED(\'" + "table"
 				+ datasetName + "_Data\'));";
 
 		loadEclCodeToCodeMirror(
-				formBasicECLForFile(fileToAdd.getValue(), !tableActionRequested).replaceAll("[\n]+", "\n") + "\n"
-						+ (tableActionRequested ? TableStr : ""));
+				formBasicECLForFile(fileToAdd.getValue(), !tableActionRequested, datasetName).replaceAll("[\n]+", "\n") + "\n"
+						+ (tableActionRequested ? TableStr : StringUtils.EMPTY));
 
 	}
 
@@ -451,7 +477,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 	public void loadFiles(List<String> selectedFiles) {
 
-		String eclBuilderCode = "";
+		String eclBuilderCode = StringUtils.EMPTY;
 		List<String> selectedUniqueFiles = new ArrayList<String>(selectedFiles);
 		for (String str : selectedFiles) {
 			if (Arrays.asList(logicalFilesForBuilder.split(",")).contains(str)) {
@@ -463,10 +489,10 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 		} else {
 			for (String str : selectedUniqueFiles) {
 
-				eclBuilderCode += formBasicECLForFile(str, true);
+				eclBuilderCode += formBasicECLForFile(str, true, StringUtils.EMPTY);
 
 				logicalFilesForBuilder += (org.apache.commons.lang.StringUtils.isNotEmpty(logicalFilesForBuilder) ? ","
-						: "") + str;
+						: StringUtils.EMPTY) + str;
 			}
 		}
 
@@ -558,7 +584,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 			wu.setJobname("myjobname");
 
 			wuID = connector.submitECLandGetWUID(wu);
-			String wuresults = "";
+			String wuresults = StringUtils.EMPTY;
 			JSONObject resJson;
 			List<ECLBuilderReportData> reportDetails = new ArrayList<ECLBuilderReportData>();
 
@@ -596,12 +622,20 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 			String userID = ((User) ((AuthenticationService) SpringUtil.getBean(Constants.AUTHENTICATION_SERVICE))
 					.getCurrentUser()).getId();
+			
+			JSONObject tempJson = new JSONObject();
+			
+			tempJson.put("logicalFilesForBuilder", logicalFilesForBuilder);
+			
+			tempJson.put("listOfFiles", completeLogiFilPathinBuilder);
+			
 
-			ECLBuilder eclBuilderDtls = new ECLBuilder(userID, eclBuilderName, logicalFilesForBuilder,
+			ECLBuilder eclBuilderDtls = new ECLBuilder(userID, eclBuilderName, tempJson.toString(),
 					new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis()), builderCode.getText(), hpccID,
 					wuID, datasetFieldsDts.toString());
 
 			((EClBuilderDao) SpringUtil.getBean("EClBuilderDao")).addOrUpdateECLBuilders(eclBuilderDtls, true);
+			
 		} catch (Exception e) {
 			Clients.showNotification(e.getLocalizedMessage(), builderCode, true);
 			System.out.println(e.getStackTrace());
@@ -672,7 +706,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 	@Listen("onFileClickAction=#treeGrid")
 	public void onClickFileName(ForwardEvent event) {
-		String str = formBasicECLForFile(((Treeitem) event.getOrigin().getTarget()).getValue(), true);
+		String str = formBasicECLForFile(((Treeitem) event.getOrigin().getTarget()).getValue(), true, StringUtils.EMPTY);
 
 		System.out.println(str);
 	}
@@ -685,7 +719,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 			StringBuffer fields = new StringBuffer();
 
 			if (eclCode.contains("RECORD")) {
-				eclCode = eclCode.replace(";", "");
+				eclCode = eclCode.replace(";", StringUtils.EMPTY);
 				for (String s : eclCode.split("\n")) {
 
 					if (!(s.trim().equalsIgnoreCase("RECORD") || s.trim().equalsIgnoreCase("END"))) {
@@ -696,7 +730,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 				}
 
 			} else {
-				eclCode = eclCode.replace("{", "").replace("}", "");
+				eclCode = eclCode.replace("{", StringUtils.EMPTY).replace("}", StringUtils.EMPTY);
 				for (String s : eclCode.split(",")) {
 					s = s.trim();
 					String str[] = s.split(" ");
@@ -709,16 +743,21 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "";
+			return StringUtils.EMPTY;
 		}
 
 	}
 
-	private String formBasicECLForFile(String logicalFile, boolean addOutput) {
+	private String formBasicECLForFile(String logicalFile, boolean addOutput, String dsName) {
 
 		logicalFile = logicalFile.startsWith("~") ? logicalFile : "~" + logicalFile;
 		String tempStrArr[] = logicalFile.split("::");
-		String datasetName = tempStrArr[tempStrArr.length - 1].replaceAll("[^A-Za-z_]+", "");
+		String datasetName = tempStrArr[tempStrArr.length - 1].replaceAll("[^A-Za-z_]+", StringUtils.EMPTY);
+		
+		if(StringUtils.isNotEmpty(dsName)){
+			datasetName = dsName;
+		}
+
 		DFUFileDetailInfo dfuFileDetail;
 		try {
 			dfuFileDetail = connector.getWsDFUClient().getFileDetails(logicalFile, null);
@@ -733,11 +772,11 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 
 		} catch (HPCCException e) {
 			e.printStackTrace();
-			return "";
+			return StringUtils.EMPTY;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "";
+			return StringUtils.EMPTY;
 		}
 	}
 
@@ -851,7 +890,7 @@ public class BuildECLController extends SelectorComposer<Component>implements Ev
 	private FileMetaTreeNode getFileInfoTreeData(FileMeta obj, String currentDir) {
 
 		FileMeta newFile = new FileMeta();
-		newFile.setFileName("");
+		newFile.setFileName(StringUtils.EMPTY);
 		List<FileMetaTreeNode> rootFile = new ArrayList<FileMetaTreeNode>();
 		rootFile.add(new FileMetaTreeNode(newFile));
 		try {
